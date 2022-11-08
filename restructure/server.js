@@ -16,7 +16,7 @@ const Chain = impots.mega;
 let status;
 
 //creating user
-let user = new User('banda');
+let user = new User('peter');
 
 
 /*if(impots.chain.length !== 0){
@@ -51,11 +51,11 @@ app.get('/', (req, res) => {
 });
 
 let chainM = [];
-app.get('/blockchain',(req,res) =>{
+app.get('/blockchain', (req, res) => {
   res.send(impots.chain);
 });
 
-app.get('/blockchains',(req,res) =>{
+app.get('/blockchains', (req, res) => {
   chain.chainSender(res);
 });
 
@@ -64,15 +64,15 @@ app.get('/transactions', (req, res) => {
   res.send(impots.transactions);
 });
 
-app.get('/resolve',(req,res) =>{
+app.get('/resolve', (req, res) => {
   nodes.resolve(res, impots.chain);
 });
 
-app.get('/allNodes',(req,res) =>{
+app.get('/allNodes', (req, res) => {
   nodes.allNodes(res);
 });
 
-app.post('/stuff',(req,res)=>{
+app.post('/stuff', (req, res) => {
   console.log('receiving request');
   console.log(req.body);
   const data = req.body;
