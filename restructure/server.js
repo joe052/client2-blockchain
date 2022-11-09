@@ -18,6 +18,11 @@ let status;
 //creating user
 let user = new User('peter');
 
+//method to refresh blockchain at a specified interval
+setInterval(() => {
+  user.update();
+}, 60000);
+
 
 /*if(impots.chain.length !== 0){
   impots.chain = impots.chain[0];
@@ -76,7 +81,7 @@ app.post('/stuff', (req, res) => {
   console.log('receiving request');
   console.log(req.body);
   const data = req.body;
-  user.transact(data,res);
+  user.transact(data, res);
   status = true;
   return res.redirect("index.html");
 });

@@ -212,6 +212,52 @@ class Chain {
     //console.log(balance);
   }
 
+  //update the chain periodically
+  async chainUpdate() {
+    //get the chain first
+    const newChain = await this.getPchain();
+    console.log("recent blockchain update in use has blocks:");
+    console.log(newChain.length);
+
+    //adding transaction to acquired chain
+    //const chain = this.addData(newChain,transaction);
+    let setup = [];
+    setup.push(newChain);
+    //picking chain elements only #filtering
+    setup = setup[0];
+    //setup = setup[0];
+    console.log("This is the chain i fetched:");
+    //console.log(setup);
+
+    //checking length of fetched chain
+    console.log(setup.length);
+
+    //pushing update to blockchain
+    if (Array.isArray(this.chain)) {
+
+      //emptying previous array
+      while (this.chain.length) {
+        this.chain.pop();
+      }
+
+      //pushing new array
+      for (const x in setup) {
+        const data = setup[x];
+        //arr.push(data);
+        this.chain.push(data);
+      }
+      //this.chain.push(arr);
+    }
+
+    //console.log(this.chain); 
+    console.log(`blockchain updated...new length is ${this.chain.length}`);
+
+    //filtering transactions
+    this.filterTransaction(this.chain);
+
+    return this.chain;
+  }
+
   async chainSender(res) {
     //res.send(this.chain);
   }
@@ -224,6 +270,10 @@ class Wallet {
     this.publicKey = publicKey;
     this.minimum = 100;
     //this.bal = bal;
+  }
+
+  async chainUpdate() {
+    Chain.instance.chainUpdate();
   }
 
   async transactLand(size, receiverPublicKey, res) {
