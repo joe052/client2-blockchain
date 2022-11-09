@@ -1,24 +1,24 @@
 const impots = require('./progress.js');
 const Wallet = impots.wallet;
 
-class User{
-  constructor(publicKey){
+class User {
+  constructor(publicKey) {
     this.publicKey = publicKey;
     //this.createUser();
   }
 
-  createUser(){
+  createUser() {
     //let wall = new Wallet(this.publicKey);
     //wall.transactLand(800,'brooooocio');
   }
 
-  transact(data,res){
+  transact(data, res) {
     //const response = fetch('/stuff');
     //const data = response.json();
     const x = parseInt(data.size);
     const y = data.key;
     let wall = new Wallet(this.publicKey);
-    wall.transactLand(x,y);
+    wall.transactLand(x, y, res);
   }
 
   update() {
@@ -27,11 +27,11 @@ class User{
   }
 
   getBalance(res) {
-    return new Promise(async (resolve,reject)=>{
+    return new Promise(async (resolve, reject) => {
       let wall = new Wallet(this.publicKey);
       let balance = await wall.getBalance();
       resolve(balance);
-    });    
+    });
   }
 }
 

@@ -276,15 +276,15 @@ class Wallet {
     Chain.instance.chainUpdate();
   }
 
-   async getBalance() {
+  async getBalance() {
     //check if chain is available
     const newChain = await Chain.instance.getPchain();
-    let availableLand = await Chain.instance.getBalanceOfAddress(this.publicKey);    
+    let availableLand = await Chain.instance.getBalanceOfAddress(this.publicKey);
     return availableLand;
   }
 
   async transactLand(size, receiverPublicKey, res) {
-    let availableLand = await this.getBalance();    
+    let availableLand = await this.getBalance();
     let minimum = this.minimum;
     let newBalance = availableLand - size;
 
@@ -296,21 +296,17 @@ class Wallet {
         //Chain.instance.getChain(transaction);
         Chain.instance.getResolve(transaction);
         response = `\nTransaction of land size ${size} to ${receiverPublicKey} completed successfuly your new balance is  ${newBalance}`;
-        res.send({ message: response });
-        //res.redirect("index.html");
         //console.log(transaction);
       } else {
         response = `\nunable to initiate transaction from ${this.publicKey}...minimum transactable size is ${minimum}`;
         console.log(response);
-        res.send({ message: response });
       }
 
     } else {
       response = `\ninsufficient land size to initiate transaction from ${this.publicKey} available balance is ${availableLand}`;
       console.log(response);
-      res.send({ message: response });
     }
-
+    res.send({ message: response });
   }
 }
 
